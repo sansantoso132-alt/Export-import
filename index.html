@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Samudra Nusa Global – Export Import</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Instrument+Serif:ital@0;1&display=swap");
+:root{--bg:#050a1f;--fg:#eef1ff;--mut:#8f98c4;--ac:#4d74ff;--acf:#fff;--ln:rgba(160,180,255,.16);--card:#0a1233;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef1fb;--fg:#0a1233;--mut:#56608a;--ac:#2147e8;--ln:rgba(10,18,51,.15);--card:#fff}}
+:root[data-theme="light"]{--bg:#eef1fb;--fg:#0a1233;--mut:#56608a;--ac:#2147e8;--ln:rgba(10,18,51,.15);--card:#fff}
+:root[data-theme="dark"]{--bg:#050a1f;--fg:#eef1ff;--mut:#8f98c4;--ac:#4d74ff;--ln:rgba(160,180,255,.16);--card:#0a1233}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:"Syne","Segoe UI",system-ui,sans-serif;overflow-x:hidden;line-height:1.5}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+a{color:inherit;text-decoration:none}
+@media(hover:hover){body,a,button{cursor:none}}
+#cur{position:fixed;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--ac);pointer-events:none;z-index:99;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .25s,height .25s}
+#cur.big{width:70px;height:70px}
+@media(hover:none){#cur{display:none}}
+#pre{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;align-items:flex-end;justify-content:space-between;padding:4vw;font-size:clamp(4rem,16vw,14rem);font-weight:800;line-height:.8;transition:transform 1s cubic-bezier(.8,0,.1,1)}
+#pre small{font-size:1rem;font-weight:500;color:var(--mut);max-width:14ch}
+body.done #pre{transform:translateY(-101%)}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px 4vw;mix-blend-mode:difference;color:#fff}
+nav b{font-size:1.3rem;letter-spacing:-.02em}
+nav div{display:flex;gap:28px;font-size:.95rem}
+nav a:hover{opacity:.6}
+@media(max-width:700px){nav div a:not(:last-child){display:none}}
+section{padding:14vh 4vw;position:relative}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:7vh;overflow:hidden}
+#gl{position:absolute;right:-8vw;top:6vh;width:min(95vw,860px);height:min(95vw,860px);opacity:.95;pointer-events:none}
+h1{font-size:clamp(3rem,10.5vw,10rem);line-height:.92;letter-spacing:-.045em;font-weight:800;position:relative}
+h1 span{display:block;overflow:hidden}
+h1 span i{display:block;font-style:normal;transform:translateY(110%);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+body.done h1 span i{transform:none}
+body.done h1 span:nth-child(2) i{transition-delay:.12s}
+body.done h1 span:nth-child(3) i{transition-delay:.24s}
+.sub{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:5vh;position:relative}
+.sub p{max-width:42ch;color:var(--mut);font-size:1.1rem}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 30px;border-radius:99px;background:var(--ac);color:var(--acf);font-weight:700;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:scale(1.06);box-shadow:0 0 50px var(--ac)}
+.fly{position:absolute;top:22vh;left:0;width:240px;animation:fly 14s linear infinite;z-index:2}
+.fly:after{content:"";position:absolute;right:100%;top:48%;width:260px;height:2px;background:linear-gradient(90deg,transparent,var(--ac))}
+@keyframes fly{from{transform:translate(-300px,40px) rotate(4deg)}to{transform:translate(110vw,-120px) rotate(-3deg)}}
+.mq{overflow:hidden;border-block:1px solid var(--ln);padding:26px 0;white-space:nowrap}
+.mq div{display:inline-block;animation:mq 28s linear infinite;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-.03em}
+.mq em{color:var(--ac);padding:0 .6em}
+@keyframes mq{to{transform:translateX(-50%)}}
+.big{font-size:clamp(1.8rem,4.6vw,4.4rem);line-height:1.08;letter-spacing:-.035em;font-weight:700;max-width:22ch}
+.about{display:grid;gap:8vh}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid var(--ln)}
+.stats div{padding:34px 0;border-bottom:1px solid var(--ln)}
+.stats b{display:block;font-size:clamp(3rem,7vw,6rem);letter-spacing:-.05em;line-height:1}
+.stats span{color:var(--mut)}
+.lane{border-top:1px solid var(--ln);padding:5vh 0 0}
+.lane header{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.lane h3{font-size:clamp(2.4rem,7vw,6.5rem);letter-spacing:-.045em;line-height:1;transition:color .4s}
+.lane:hover h3{color:var(--ac)}
+.lane p{max-width:38ch;color:var(--mut)}
+.track{position:relative;height:150px;margin-top:2vh;overflow:hidden;color:var(--ac)}
+.veh{position:absolute;bottom:18px;left:0;will-change:transform}
+.veh svg{display:block;overflow:visible;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35))}
+.road:after{content:"";position:absolute;left:0;right:0;bottom:12px;height:2px;background:repeating-linear-gradient(90deg,var(--ln) 0 30px,transparent 30px 60px);animation:rd 1s linear infinite}
+@keyframes rd{to{background-position:-60px 0}}
+.wh{transform-box:fill-box;transform-origin:center;animation:sp .5s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.sea:after{content:"";position:absolute;left:-10%;right:-10%;bottom:0;height:40px;background:radial-gradient(circle at 20px 0,transparent 18px,var(--ac) 19px 21px,transparent 22px) 0 0/40px 40px;opacity:.5;animation:wv 3s linear infinite}
+@keyframes wv{to{background-position:-40px 0}}
+.sea .veh{bottom:6px}.sea .veh svg{animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-1.2deg)}}
+.sky .veh{bottom:50px}
+.sky .veh svg{animation:bob 4s ease-in-out infinite}
+.cl{position:absolute;height:14px;border-radius:9px;background:var(--ln);animation:cl 14s linear infinite}
+@keyframes cl{from{transform:translateX(110vw)}to{transform:translateX(-300px)}}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:7vh}
+.step{background:var(--card);border:1px solid var(--ln);border-radius:24px;padding:30px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .4s,border-color .4s}
+.step:hover{transform:translateY(-10px);border-color:var(--ac)}
+.step b{font-size:3.4rem;color:var(--ac);letter-spacing:-.05em}
+.step h4{font-size:1.5rem;margin-bottom:6px}
+.step p{color:var(--mut);font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:6vh}
+.chips span{padding:14px 26px;border:1px solid var(--ln);border-radius:99px;font-size:1.1rem;transition:.3s}
+.chips span:hover{background:var(--ac);color:var(--acf);transform:rotate(-3deg) scale(1.08)}
+.cta{text-align:center;display:grid;justify-items:center;gap:5vh;padding-block:20vh;overflow:hidden}
+.cta h2{font-size:clamp(3rem,11vw,10rem);line-height:.92;letter-spacing:-.05em;font-weight:800}
+footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:30px 4vw;border-top:1px solid var(--ln);color:var(--mut);font-size:.9rem}
+.rv{opacity:0;transform:translateY(60px);transition:opacity 1s,transform 1s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.jr{padding:0;height:700vh}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;color:#fff;background:#050c26}
+.lay{position:absolute;inset:0}
+.l-sea{background:linear-gradient(#050c26 0,#0a2a5c 60%,#0e4a7a 100%)}
+.l-sky{background:linear-gradient(#081244 0,#2b45c4 55%,#9fb4ff 100%);opacity:0}
+.l-land{background:linear-gradient(#0d1235 0,#3a2a6a 55%,#ff9a6a 100%);opacity:0}
+.orb{position:absolute;left:78%;top:20%;width:180px;height:180px;margin:-90px;border-radius:50%;background:radial-gradient(#fff3d6 0,rgba(255,200,120,.55) 35%,transparent 70%)}
+#stars{position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%}
+.clouds{position:absolute;inset:0;opacity:0}.clouds span{position:absolute;left:0;height:24px;border-radius:20px;background:rgba(255,255,255,.25);animation:cl 40s linear infinite}
+.sk{position:absolute;left:0;bottom:20vh;width:100%;height:30vh;fill:rgba(255,255,255,.08);opacity:0}
+.waves{position:absolute;left:-5%;right:-5%;bottom:0;height:22vh;background:radial-gradient(circle at 20px 0,transparent 18px,rgba(120,180,255,.5) 19px 21px,transparent 22px) 0 0/40px 40px,linear-gradient(rgba(14,74,122,.9),#04132e);animation:wv 3s linear infinite}
+.roadb{position:absolute;left:0;right:0;bottom:0;height:20vh;background:linear-gradient(#1a1f3a,#0b0e22);opacity:0}
+.roadb:after{content:"";position:absolute;left:0;right:0;bottom:5vh;height:3px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 36px,transparent 36px 72px);animation:rd 1s linear infinite}
+.sv{position:absolute;left:0;top:0;transform-origin:50% 100%;z-index:4;will-change:transform}
+.sv svg{display:block;filter:drop-shadow(0 10px 12px rgba(0,0,0,.4))}
+#bld{position:absolute;left:0;top:0;width:180px;height:140px;transform-origin:50% 100%;z-index:3;border-radius:8px 8px 0 0;background:linear-gradient(#1b2352,#0d1233);box-shadow:inset 0 0 0 2px rgba(160,180,255,.25)}
+#bld:before{content:"";position:absolute;left:14px;right:14px;top:16px;height:40px;background:repeating-linear-gradient(90deg,rgba(255,220,150,.7) 0 14px,transparent 14px 28px)}
+#bld i{position:absolute;left:50%;bottom:0;width:44px;height:66px;margin-left:-22px;background:#050816;border-radius:6px 6px 0 0;box-shadow:inset 0 0 0 2px var(--ac);transition:.5s}
+#bld span{position:absolute;left:0;right:0;top:-28px;text-align:center;font-size:.8rem;color:#cfd6ff}
+#bld.ok i{background:linear-gradient(var(--ac),#0a1440);box-shadow:0 0 50px var(--ac)}
+#bld.ok:after{content:"";position:absolute;left:50%;bottom:34px;width:20px;height:20px;margin:-10px;border-radius:50%;border:3px solid var(--ac);animation:rg 1.4s ease-out infinite}
+@keyframes rg{to{transform:scale(12);opacity:0}}
+#crate{position:absolute;left:0;top:0;width:54px;height:46px;transform-origin:50% 100%;z-index:6;border-radius:6px;background:linear-gradient(135deg,var(--ac),#0a1440);box-shadow:0 0 30px var(--ac),inset 0 0 0 2px rgba(255,255,255,.4);display:grid;place-items:center;font-weight:800;font-size:11px;color:#fff;animation:gl 1.6s ease-in-out infinite}
+#crate:before{content:"";position:absolute;inset:0;border-radius:6px;background:repeating-linear-gradient(90deg,transparent 0 8px,rgba(255,255,255,.18) 8px 10px)}
+@keyframes gl{50%{box-shadow:0 0 56px var(--ac),inset 0 0 0 2px rgba(255,255,255,.4)}}
+#pill{position:absolute;left:0;top:0;z-index:7;white-space:nowrap;padding:6px 14px;border-radius:99px;background:rgba(5,10,31,.85);border:1px solid var(--ac);font-size:.8rem}
+.hud{position:absolute;left:6vw;top:calc(12vh + env(safe-area-inset-top,0px));z-index:8;max-width:min(520px,66vw);pointer-events:none}
+.hud small{display:block;color:#b9c4ff;margin-bottom:10px}
+.hud h2{font-size:clamp(2.6rem,9vw,8rem);line-height:.92;letter-spacing:-.05em;font-weight:800;transition:opacity .3s,transform .3s}
+.hud p{color:#d3d9ff;margin-top:12px;max-width:34ch;transition:opacity .3s,transform .3s}
+.hud.sw h2,.hud.sw p{opacity:0;transform:translateY(14px)}
+#km{position:absolute;right:6vw;top:calc(12vh + env(safe-area-inset-top,0px));z-index:8;text-align:right;font-weight:800;font-size:clamp(1.2rem,3vw,2.4rem)}#km small{display:block;font-weight:500;font-size:.8rem;color:#b9c4ff}
+.rail{position:absolute;left:6vw;right:6vw;bottom:calc(4vh + env(safe-area-inset-bottom,0px));z-index:8;display:flex;font-size:.85rem}
+.rail:before{content:"";position:absolute;left:0;right:0;top:5px;height:2px;background:rgba(255,255,255,.2)}
+.rail u{position:absolute;left:0;top:5px;height:2px;background:var(--ac);width:0}
+.rail span{position:relative;flex:1;padding-top:20px;color:#8f98c4;transition:.4s}
+.rail span:before{content:"";position:absolute;top:0;left:0;width:12px;height:12px;border-radius:50%;background:#26305f;transition:.4s}
+.rail span.on{color:#fff}.rail span.on:before{background:var(--ac);box-shadow:0 0 16px var(--ac)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ac)"/><stop offset=".55" style="stop-color:var(--ac)"/><stop offset="1" stop-color="#0a1440"/></linearGradient><linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fafbff"/><stop offset="1" stop-color="#9aa4bd"/></linearGradient><linearGradient id="gG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3ff"/><stop offset="1" stop-color="#1a2a4d"/></linearGradient><linearGradient id="gD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4156"/><stop offset="1" stop-color="#090c14"/></linearGradient><radialGradient id="gR"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#8d96ab"/></radialGradient><g id="wc"><circle r="15" fill="#0b0d14"/><circle r="10" fill="url(#gR)"/><path d="M0-10V10M-10 0H10M-7-7L7 7M-7 7L7-7" stroke="#59627a" stroke-width="1.5"/><circle r="3" fill="#333"/></g><g id="wm"><circle r="22" fill="none" stroke="#0b0d14" stroke-width="7"/><circle r="17" fill="none" stroke="#aab3c9" stroke-width="2"/><path d="M0-17V17M-17 0H17M-12-12L12 12M-12 12L12-12" stroke="#8d96ab"/><circle r="4" fill="#59627a"/></g><pattern id="ct" x="22" y="26" width="88" height="36" patternUnits="userSpaceOnUse"><g stroke="#000" stroke-opacity=".3"><rect x="0" y="24" width="22" height="12" fill="#d9531e"/><rect x="22" y="24" width="22" height="12" fill="#1f6fb5"/><rect x="44" y="24" width="22" height="12" fill="#e8b923"/><rect x="66" y="24" width="22" height="12" fill="#3a8f5b"/><rect x="0" y="12" width="22" height="12" fill="#1f6fb5"/><rect x="22" y="12" width="22" height="12" fill="#e8b923"/><rect x="44" y="12" width="22" height="12" fill="#d9531e"/><rect x="66" y="12" width="22" height="12" fill="#c8cdd8"/><rect x="0" y="0" width="22" height="12" fill="#3a8f5b"/><rect x="22" y="0" width="22" height="12" fill="#d9531e"/><rect x="44" y="0" width="22" height="12" fill="#1f6fb5"/><rect x="66" y="0" width="22" height="12" fill="#e8b923"/></g></pattern><symbol id="pl" viewBox="0 0 260 80"><path d="M18 36L9 6H30L52 32Z" fill="url(#gA)"/><path d="M8 44Q10 33 40 31L210 29Q250 29 254 42Q250 52 220 54L40 55Q12 55 8 44Z" fill="url(#gB)"/><path d="M20 46Q130 51 252 43" fill="none" stroke-width="3" style="stroke:var(--ac)"/><path d="M58 40H214" stroke="#41506f" stroke-width="3" stroke-dasharray="4 8" fill="none"/><path d="M226 35H240Q247 37 250 41H226Z" fill="url(#gG)"/><path d="M120 46L172 46L142 72L112 72Z" fill="#8f9ab3"/><rect x="126" y="55" width="36" height="14" rx="7" fill="url(#gD)"/><ellipse cx="128" cy="62" rx="3" ry="6" fill="#05070c"/></symbol></defs></svg><div id="cur"></div>
+<div id="pre"><span id="cnt">0</span><small>Menyiapkan pengiriman lintas benua</small></div>
+
+<nav><b>Samudra Nusa</b><div><a href="#about">Tentang</a><a href="#layanan">Layanan</a><a href="#alur">Alur</a><a href="#kontak">Kontak</a></div></nav>
+
+<section class="hero">
+  <canvas id="gl"></canvas>
+  <svg class="fly" viewBox="0 0 260 80"><use href="#pl"/></svg>
+  <h1><span><i>Dagang dunia,</i></span><span><i>tiba tepat waktu,</i></span><span><i class="serif">di mana saja.</i></span></h1>
+  <div class="sub">
+    <p>Samudra Nusa Global mengurus ekspor dan impor Anda lewat darat, laut, dan udara, dari gudang pertama sampai pintu pembeli.</p>
+    <a class="btn" href="#kontak">Minta penawaran</a>
+  </div>
+</section>
+
+<div class="mq"><div><span>Ekspor</span><em>✦</em><span>Impor</span><em>✦</em><span>Bea Cukai</span><em>✦</em><span>Pergudangan</span><em>✦</em><span>Freight Forwarding</span><em>✦</em><span>Ekspor</span><em>✦</em><span>Impor</span><em>✦</em><span>Bea Cukai</span><em>✦</em><span>Pergudangan</span><em>✦</em><span>Freight Forwarding</span><em>✦</em></div></div>
+
+<section id="about" class="about">
+  <p class="big rv">Kami menyatukan produsen Indonesia dengan pembeli di lebih dari 40 negara, tanpa dokumen yang tersangkut dan tanpa kejutan biaya.</p>
+  <div class="stats rv">
+    <div><b data-n="12">0</b><span>tahun di industri perdagangan</span></div>
+    <div><b data-n="40">0</b><span>negara tujuan dan asal</span></div>
+    <div><b data-n="8500">0</b><span>kontainer terkirim</span></div>
+    <div><b data-n="99">0</b><span>persen tiba sesuai jadwal</span></div>
+  </div>
+</section>
+
+<section id="journey" class="jr"><div class="stage" id="stage">
+<div class="lay l-sea"></div><div class="lay l-sky" id="lsky"></div><div class="lay l-land" id="lland"></div>
+<div class="orb" id="orb"></div><div id="stars"></div>
+<div class="clouds" id="clouds"><span style="width:200px;top:16%"></span><span style="width:300px;top:30%;animation-delay:-14s"></span><span style="width:160px;top:46%;animation-delay:-26s"></span><span style="width:240px;top:58%;animation-delay:-6s"></span></div>
+<svg class="sk" id="sk" viewBox="0 0 120 40" preserveAspectRatio="none"></svg>
+<div class="waves" id="waves"></div><div class="roadb" id="roadb"></div>
+<div id="bld"><span>Gudang pembeli</span><i></i></div>
+<div class="sv" id="v_ship"></div><div class="sv" id="v_plane"></div><div class="sv" id="v_car"></div><div class="sv" id="v_moto"></div>
+<div id="crate">SNG</div><div id="pill">SNG-2481</div>
+<div class="hud" id="hud"><small>Perjalanan satu kargo, dari asal sampai tujuan</small><h2 id="jt">Laut</h2><p id="jd"></p></div>
+<div id="km"><small>Jarak ditempuh</small><span id="kmv">0 km</span></div>
+<div class="rail" id="rail"><u id="fill"></u><span>Laut</span><span>Udara</span><span>Darat</span><span>Tiba</span></div>
+</div></section>
+
+<section id="layanan">
+  <p class="big rv" style="margin-bottom:8vh">Empat jalur, satu tim yang mengatur semuanya.</p>
+
+  <div class="lane rv"><header><h3>Darat</h3><p>Truk, trailer, dan kendaraan pengantar untuk distribusi dari pabrik ke pelabuhan dan ke pintu pelanggan.</p></header>
+    <div class="track road"><div class="veh" data-w="230"><svg width="230" height="74" viewBox="0 0 230 74"><path d="M8 46Q8 38 20 36L52 31Q66 14 92 13H138Q158 14 170 30L200 35Q214 37 214 46V52Q214 55 210 55H10Q8 55 8 52Z" fill="url(#gA)"/><path d="M62 30Q72 19 92 19H112V31ZM118 19H138Q150 20 158 31H118Z" fill="url(#gG)"/><path d="M115 19V52M12 46H210" stroke="#fff" opacity=".28"/><rect x="204" y="38" width="9" height="5" rx="2" fill="#fff"/><rect x="8" y="39" width="6" height="5" rx="2" fill="#ff3b30"/><circle cx="52" cy="55" r="18" fill="#05070c"/><circle cx="170" cy="55" r="18" fill="#05070c"/><g transform="translate(52 55)"><g class="wh"><use href="#wc"/></g></g><g transform="translate(170 55)"><g class="wh"><use href="#wc"/></g></g></svg></div></div>
+  </div>
+
+  <div class="lane rv"><header><h3>Kurir Motor</h3><p>Pengiriman cepat untuk sampel, dokumen ekspor, dan barang mendesak di dalam kota.</p></header>
+    <div class="track road"><div class="veh" data-w="190"><svg width="190" height="104" viewBox="0 0 190 104"><path d="M36 76L84 64" stroke="#6b7388" stroke-width="5" stroke-linecap="round"/><path d="M154 76L128 34" stroke="#aab3c9" stroke-width="5" stroke-linecap="round"/><g transform="translate(36 76)"><g class="wh"><use href="#wm"/></g></g><g transform="translate(154 76)"><g class="wh"><use href="#wm"/></g></g><path d="M72 50H114L106 70H78Z" fill="url(#gD)"/><path d="M82 68L30 70Q24 70 24 65" stroke="#aab3c9" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M26 42Q44 34 60 36L70 46H30Z" fill="url(#gA)"/><path d="M36 40Q58 33 76 36L72 43H36Z" fill="url(#gD)"/><path d="M66 36Q92 20 116 32L110 50Q88 46 66 50Z" fill="url(#gA)"/><path d="M112 30Q132 24 146 38L130 56Q118 54 110 46Z" fill="url(#gA)"/><path d="M134 30L122 18Q136 18 142 32Z" fill="url(#gG)"/><ellipse cx="142" cy="42" rx="5" ry="3.5" fill="#fff" transform="rotate(30 142 42)"/><path d="M124 32L112 24" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg></div></div>
+  </div>
+
+  <div class="lane rv"><header><h3>Laut</h3><p>FCL dan LCL ke seluruh pelabuhan utama dunia, lengkap dengan pelacakan kontainer.</p></header>
+    <div class="track sea"><div class="veh" data-w="320"><svg width="320" height="112" viewBox="0 0 320 112"><path d="M6 62H314L288 96Q285 100 278 100H42Q32 100 28 94Z" fill="url(#gD)"/><path d="M26 88H292L284 99Q282 100 278 100H42Q32 100 28 94Z" fill="#b3261e"/><path d="M14 72H306" stroke="#fff" stroke-width="2" opacity=".55"/><rect x="22" y="26" width="176" height="36" fill="url(#ct)"/><rect x="226" y="20" width="44" height="42" fill="url(#gB)"/><rect x="222" y="26" width="52" height="6" fill="url(#gG)"/><path d="M230 40H266M230 48H266M230 56H266" stroke="#41506f" stroke-width="3" stroke-dasharray="3 5"/><rect x="244" y="6" width="16" height="14" fill="#b3261e"/><rect x="244" y="6" width="16" height="4" fill="#090c14"/><path d="M236 20V4" stroke="#aab3c9" stroke-width="2"/><path d="M10 100Q40 94 70 100T130 100T190 100T250 100T310 100" fill="none" stroke="#fff" stroke-width="3" opacity=".6"/></svg></div></div>
+  </div>
+
+  <div class="lane rv"><header><h3>Udara</h3><p>Kargo cepat untuk produk bernilai tinggi dan barang yang tidak boleh terlambat.</p></header>
+    <div class="track sky"><span class="cl" style="width:120px;top:26px"></span><span class="cl" style="width:200px;top:80px;animation-delay:-6s;animation-duration:20s"></span><div class="veh" data-w="260"><svg width="260" height="80" viewBox="0 0 260 80"><use href="#pl"/></svg></div></div>
+  </div>
+</section>
+
+<section id="trust">
+  <p class="big rv">Alasan perusahaan di banyak negara mempercayakan kargonya kepada kami.</p>
+  <div class="steps">
+    <div class="step rv"><b>✓</b><div><h4>Legalitas lengkap</h4><p>NIB, API, dan izin PPJK aktif. Nomor resmi tercantum di surat penawaran.</p></div></div>
+    <div class="step rv"><b>✓</b><div><h4>Kargo diasuransikan</h4><p>Setiap pengiriman dilindungi asuransi sampai barang diterima pembeli.</p></div></div>
+    <div class="step rv"><b>✓</b><div><h4>Pelacakan harian</h4><p>Posisi kontainer dan status dokumen dilaporkan langsung oleh tim kami.</p></div></div>
+    <div class="step rv"><b>✓</b><div><h4>Harga tertulis</h4><p>Biaya dirinci di awal. Tidak ada tambahan yang tidak disepakati.</p></div></div>
+  </div>
+</section>
+
+<section id="alur">
+  <p class="big rv">Dari pesanan sampai barang tiba.</p>
+  <div class="steps">
+    <div class="step rv"><b>1</b><div><h4>Konsultasi</h4><p>Kami hitung rute, biaya, dan waktu terbaik untuk komoditas Anda.</p></div></div>
+    <div class="step rv"><b>2</b><div><h4>Dokumen dan bea cukai</h4><p>Invoice, packing list, izin, dan pajak diurus sampai clear.</p></div></div>
+    <div class="step rv"><b>3</b><div><h4>Pengiriman</h4><p>Barang bergerak lewat jalur yang dipilih dan dipantau setiap hari.</p></div></div>
+    <div class="step rv"><b>4</b><div><h4>Serah terima</h4><p>Barang sampai di gudang pembeli dengan bukti terima lengkap.</p></div></div>
+  </div>
+  <div class="chips rv"><span>Kopi dan kakao</span><span>Minyak kelapa sawit</span><span>Furnitur kayu</span><span>Tekstil</span><span>Hasil laut</span><span>Rempah</span><span>Suku cadang otomotif</span><span>Elektronik</span><span>Mesin industri</span></div>
+</section>
+
+<section id="kontak" class="cta">
+  <h2 class="rv">Siap kirim<br><span class="serif">ke dunia?</span></h2>
+  <a class="btn" href="mailto:hello@samudranusa.co">hello@samudranusa.co</a>
+</section>
+
+<footer><span>© 2026 Samudra Nusa Global</span><span>Jakarta, Indonesia</span><span>+62 21 0000 0000</span></footer>
+
+<script>
+(function(){
+var b=document.body,c=document.getElementById('cnt'),n=0;
+var t=setInterval(function(){n+=Math.ceil(Math.random()*7);if(n>=100){n=100;clearInterval(t);setTimeout(function(){b.classList.add('done');count()},350)}c.textContent=n},60);
+
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+
+function count(){document.querySelectorAll('[data-n]').forEach(function(el){
+var to=+el.dataset.n,s=null;
+(function f(ts){s=s||ts;var p=Math.min((ts-s)/1800,1);el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString('id-ID');if(p<1)requestAnimationFrame(f)})(performance.now());
+})}
+
+var cur=document.getElementById('cur'),mx=0,my=0,cx=0,cy=0;
+addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY});
+document.querySelectorAll('a,.step,.chips span,.lane').forEach(function(el){
+el.addEventListener('mouseenter',function(){cur.classList.add('big')});
+el.addEventListener('mouseleave',function(){cur.classList.remove('big')})});
+
+var lanes=[].slice.call(document.querySelectorAll('.track'));
+function lanesUpdate(){lanes.forEach(function(t){
+var r=t.getBoundingClientRect(),v=t.firstElementChild;
+if(!v.classList.contains('veh'))v=t.querySelector('.veh');
+var p=Math.min(Math.max((innerHeight-r.top)/(innerHeight+r.height),0),1);
+v.style.transform='translateX('+(p*(r.width-v.dataset.w))+'px)'})}
+addEventListener('scroll',lanesUpdate,{passive:true});addEventListener('resize',lanesUpdate);lanesUpdate();
+
+(function(){
+var jr=document.getElementById('journey'),$=function(i){return document.getElementById(i)};
+var src=document.querySelectorAll('.lane .veh svg'),V={};
+[['car',0,230,74],['moto',1,190,104],['ship',2,320,112],['plane',3,260,80]].forEach(function(d){var e=$('v_'+d[0]);e.appendChild(src[d[1]].cloneNode(true));e.style.width=d[2]+'px';e.style.height=d[3]+'px';V[d[0]]={e:e,w:d[2],h:d[3]}});
+var s=[],i,h='';for(i=0;i<50;i++)s.push((Math.random()*innerWidth|0)+'px '+(Math.random()*innerHeight*.6|0)+'px rgba(255,255,255,.'+(3+i%6)+')');$('stars').style.boxShadow=s.join();
+for(i=0;i<40;i++){var bh=8+(i*37%23);h+='<rect x="'+i*3+'" y="'+(40-bh)+'" width="2.6" height="'+bh+'"/>'}$('sk').innerHTML=h;
+var T={ship:[[0,-.3,.85],[.2,.3,.85],[.3,.3,.85],[.46,-.35,.85]],plane:[[.18,1.4,.3],[.28,.3,.34],[.36,.3,.34],[.52,.28,.87],[.66,.28,.87],[.8,-.3,.5]],car:[[.46,1.4,.87],[.56,.58,.87]],moto:[[.62,1.4,.87],[.72,.8,.87]]};
+var O={ship:[-60,86,1],plane:[0,24,.6],car:[0,61,.8],moto:[-50,68,.6],door:[0,24,.3]};
+var SG=[[0,.3,'ship'],[.3,.38,'ship','plane'],[.38,.56,'plane'],[.56,.64,'plane','car'],[.64,.72,'car'],[.72,.8,'car','moto'],[.8,.86,'moto'],[.86,.94,'moto','door'],[.94,9,'door']];
+var LB=['Di atas kapal','Di atas kapal','Kargo udara','Kargo udara','Armada darat','Armada darat','Kurir motor','Kurir motor','Diterima'];
+var TH=[0,.28,.5,.72,.94],TT=['Laut','Udara','Darat','Kurir terakhir','Tiba'],TD=['Kontainer berlayar dari pelabuhan asal menuju hub transit.','Dipindahkan ke kargo udara untuk menempuh sisa jarak lebih cepat.','Pesawat mendarat dan kargo dimuat ke armada darat.','Kurir motor membawa barang melewati jalan sempit kota.','Barang diterima di gudang pembeli, lengkap dengan bukti serah terima.'];
+var RN=[0,.28,.5,.94],spans=document.querySelectorAll('#rail span'),state=-1,seg=-1;
+function cl(v){return Math.min(Math.max(v,0),1)}function ez(t){return t*t*(3-2*t)}
+function kf(a,p){if(p<=a[0][0])return[a[0][1],a[0][2]];for(var i=1;i<a.length;i++)if(p<=a[i][0]){var A=a[i-1],B=a[i],t=ez((p-A[0])/(B[0]-A[0]));return[A[1]+(B[1]-A[1])*t,A[2]+(B[2]-A[2])*t]}var L=a[a.length-1];return[L[1],L[2]]}
+function frame(p){
+var W=innerWidth,H=innerHeight,sc=W<700?W/760:Math.min(1.1,W/1100),P={},k;
+for(k in V){var q=kf(T[k],p);P[k]=[q[0]*W,q[1]*H];V[k].e.style.transform='translate('+(P[k][0]-V[k].w/2)+'px,'+(P[k][1]-V[k].h)+'px) scale('+sc+')'}
+var bx=.965*W,by=.87*H;P.door=[bx,by];$('bld').style.transform='translate('+(bx-90)+'px,'+(by-140)+'px) scale('+sc+')';
+function pt(n){var o=O[n];return[P[n][0]+o[0]*sc,P[n][1]-o[1]*sc,o[2]]}
+var si=0;for(var j=0;j<SG.length;j++)if(p>=SG[j][0])si=j;var sg=SG[si],c;
+if(!sg[3])c=pt(sg[2]);else{var t=ez(cl((p-sg[0])/(sg[1]-sg[0]))),a=pt(sg[2]),b=pt(sg[3]);c=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t-480*sc*t*(1-t)/4*1,a[2]+(b[2]-a[2])*t]}
+var cs=c[2]*sc,op=1-cl((p-.94)/.04);
+$('crate').style.transform='translate('+(c[0]-27)+'px,'+(c[1]-46)+'px) scale('+cs+')';$('crate').style.opacity=op;
+var pl=$('pill');pl.style.transform='translate('+c[0]+'px,'+(c[1]-46*cs-12)+'px) translate(-50%,-100%)';pl.style.opacity=op;
+if(si!==seg){seg=si;pl.textContent='SNG-2481 \u00b7 '+LB[si]}
+var so=1-cl((p-.3)/.12);$('waves').style.opacity=so;$('lsky').style.opacity=cl((p-.26)/.1);$('lland').style.opacity=cl((p-.46)/.1);$('roadb').style.opacity=cl((p-.44)/.1);$('sk').style.opacity=cl((p-.48)/.12);
+$('clouds').style.opacity=cl((p-.26)/.08)*(1-cl((p-.52)/.1));$('stars').style.opacity=.8*(1-cl((p-.5)/.15));$('orb').style.top=((.18+.4*p)*H)+'px';
+$('bld').classList.toggle('ok',p>=.94);
+var st=0;for(j=0;j<5;j++)if(p>=TH[j])st=j;
+if(st!==state){state=st;var hd=$('hud');hd.classList.add('sw');setTimeout(function(){$('jt').textContent=TT[st];$('jd').textContent=TD[st];hd.classList.remove('sw')},state===0&&!$('jd').textContent?0:260)}
+var ri=0;for(j=0;j<4;j++)if(p>=RN[j]){ri=j;spans[j].classList.add('on')}else spans[j].classList.remove('on');
+var fr=ri<3?cl((p-RN[ri])/(RN[ri+1]-RN[ri])):0;$('fill').style.width=((ri+fr)/4*100)+'%';
+$('kmv').textContent=Math.round(cl(p/.94)*7850).toLocaleString('id-ID')+' km';}
+var pc=0;(function tick(){var r=jr.getBoundingClientRect(),tg=cl(-r.top/(r.height-innerHeight));pc+=(tg-pc)*.12;if(Math.abs(tg-pc)<.0003)pc=tg;if(r.bottom>0&&r.top<innerHeight*1.2)frame(pc);requestAnimationFrame(tick)})();
+})();
+var cv=document.getElementById('gl'),g=cv.getContext('2d'),N=520,P=[],rot=0,tx=0,ty=0,sx=0,sy=0,S=0;
+for(var i=0;i<N;i++){var y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),a=i*2.399963;P.push([Math.cos(a)*r,y,Math.sin(a)*r])}
+function size(){var d=devicePixelRatio||1;S=cv.clientWidth;cv.width=cv.height=S*d;g.setTransform(d,0,0,d,0,0)}
+size();addEventListener('resize',size);
+addEventListener('mousemove',function(e){tx=(e.clientX/innerWidth-.5)*.8;ty=(e.clientY/innerHeight-.5)*.6});
+function col(){return getComputedStyle(document.documentElement).getPropertyValue('--ac').trim()||'#4d74ff'}
+var arcs=[[0,40],[100,300],[200,450],[350,60]];
+(function draw(){
+rot+=.004;sx+=(tx-sx)*.05;sy+=(ty-sy)*.05;
+g.clearRect(0,0,S,S);var R=S*.36,k=col(),cs=Math.cos(rot+sx),sn=Math.sin(rot+sx),pr=[];
+P.forEach(function(p,i){var x=p[0]*cs-p[2]*sn,z=p[0]*sn+p[2]*cs,y=p[1]*Math.cos(sy)-z*Math.sin(sy);z=p[1]*Math.sin(sy)+z*Math.cos(sy);
+pr[i]=[S/2+x*R,S/2+y*R,z];
+g.globalAlpha=.15+.85*(z+1)/2;g.fillStyle=k;g.beginPath();g.arc(pr[i][0],pr[i][1],1.1+1.4*(z+1)/2,0,6.283);g.fill()});
+g.strokeStyle=k;g.lineWidth=1.4;
+arcs.forEach(function(a,j){var A=pr[a[0]],B=pr[a[1]];if(A[2]<-.2||B[2]<-.2)return;
+var mxp=(A[0]+B[0])/2,myp=(A[1]+B[1])/2-S*.12;g.globalAlpha=.7;g.beginPath();g.moveTo(A[0],A[1]);g.quadraticCurveTo(mxp,myp,B[0],B[1]);g.stroke();
+var u=((performance.now()/1800+j*.25)%1),qx=(1-u)*(1-u)*A[0]+2*(1-u)*u*mxp+u*u*B[0],qy=(1-u)*(1-u)*A[1]+2*(1-u)*u*myp+u*u*B[1];
+g.globalAlpha=1;g.beginPath();g.arc(qx,qy,4,0,6.283);g.fill()});
+cx+=(mx-cx)*.2;cy+=(my-cy)*.2;cur.style.left=cx+'px';cur.style.top=cy+'px';
+requestAnimationFrame(draw)})();
+})();
+</script>
+</body>
+</html>
